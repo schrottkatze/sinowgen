@@ -1,0 +1,17 @@
+{
+  "name": "p5ts-boilerplate",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "compile and watch": "npx webpack --watch"
+  },
+  "dependencies": {
+    "@types/p5": "^1.3.0",
+    "p5": "^1.4.0",
+    "ts-loader": "^9.2.5",
+    "typescript": "^4.3.5",
+    "webpack": "^5.49.0",
+    "webpack-cli": "^4.7.2"
+  }
+}
