@@ -31,7 +31,7 @@ export default function gBiomeMap(h: number): number[] {
   r = addBiome(
     h,
     { min: 65, height: 35 },
-    { low: { r: 118, g: 122, b: 121 }, high: { r: 167, g: 174, b: 174 } }
+    { low: { r: 105, g: 105, b: 105 }, high: { r: 205, g: 200, b: 200 } }
   );
   if (!!r) return r;
 
