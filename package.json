@@ -4,6 +4,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
+    "compile": "npx webpack",
     "compile and watch": "npx webpack --watch"
   },
   "dependencies": {
