@@ -8,6 +8,7 @@ import { makeNoise2D } from "open-simplex-noise";
 import { textChangeRangeIsUnchanged } from "typescript";
 import WorldGenerator from "./WorldGenerator";
 import SimpleBiome from "./biomes/SimpleBiome";
+import { biomeMaps } from "./biomes/BiomeMaps";
 
 class App {
   public readonly scale = 0.005;
@@ -37,12 +38,7 @@ class App {
     const fracNoise = new FractalNoise(this.seed, this.detail);
 
     // const world = new WorldGenerator();
-    const biomes = new BiomeGenerator([
-      new SimpleBiome(0, 35, [10, 28, 38, 255], [49, 87, 115, 255]),
-      new SimpleBiome(35, 10, [129, 125, 120, 255], [164, 158, 140, 255]),
-      new SimpleBiome(45, 20, [50, 57, 18, 255], [91, 93, 46, 255]),
-      new SimpleBiome(65, 35, [105, 105, 105, 255], [205, 200, 200, 255]),
-    ]);
+    const biomeMap = biomeMaps.robinBiomeMap;
 
     for (let x = 0; x < this.width; ++x) {
       for (let y = 0; y < this.height; ++y) {
@@ -52,7 +48,7 @@ class App {
 
         // p.set(x, y, robinBiomeMap(h));
         // p.set(x, y, gBiomeMap(h));
-        p.set(x, y, biomes.getBiome(h));
+        p.set(x, y, biomeMap.getBiome(h));
         // p.set(x, y, [0, h, 0, 255]);
       }
     }
