@@ -9,13 +9,13 @@ export default class FractalNoise {
   }
 
   makeNoise(x: number, y: number): number {
-    let sum = 0;
+    let r = 0;
 
     for (let i = 0; i < (this.depth || 4); ++i) {
       const factor = Math.pow(2, i);
-      sum += (this.noise2d(x * factor, y * factor) + 1) / 2 / factor;
+      r += (this.noise2d(x * factor, y * factor) + 1) / 2 / factor;
     }
 
-    return sum / 2;
+    return r / 2;
   }
 }

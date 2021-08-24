@@ -1,0 +1,26 @@
+doctype html
+html(lang="en")
+head
+  meta(charset="UTF-8")
+  meta(http-equiv="X-UA-Compatible", content="IE=edge")
+  meta(name="viewport", content="width=device-width, initial-scale=1.0")
+  title Map Generator
+body 
+  #controls
+    .settings 
+      .map-size 
+        input#height(type="number", name="height")
+        input#width(type="number", name="width")
+      .noise-settings 
+        .noise-zoom
+          input#zoom(type="number", name="")
+          .shift
+            input#x-shift(type="number", name="x-shift")
+            input#y-shift(type="number", name="y-shift")
+        .seed
+          input#use-random(type="checkbox", name="use-random")
+          input#seed(type="text", name="seed")
+        .detail
+          input#detail(type="number", name="detail")
+    .generatebtn
+  #container
