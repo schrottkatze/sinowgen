@@ -1,4 +1,4 @@
-export type Map = number[][];
+export type Map<T> = T[][];
 
 export type Color = [
   number, // red

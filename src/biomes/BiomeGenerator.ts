@@ -5,7 +5,7 @@ import SimpleBiome from "./SimpleBiome";
 export default class BiomeGenerator {
   constructor(private readonly biomeList: SimpleBiome[]) {}
 
-  getBiome(height: number): Color {
+  public getBiome(height: number): Color {
     for (let i = 0; i < this.biomeList.length; ++i) {
       let biomeColorCode = this.biomeList[i].getColorCodeForHeightPos(height);
       if (biomeColorCode) return biomeColorCode;
@@ -14,7 +14,10 @@ export default class BiomeGenerator {
     return [255, 0, 0, 255];
   }
 
-  applyHeat(temperatureMap: number[][], heatLevel: number): Map {
+  private applyHeat(
+    temperatureMap: number[][],
+    heatLevel: number
+  ): Map<number> {
     for (let x = 0; x < app.width; ++x) {
       for (let y = 0; y < app.height; ++y) {
         temperatureMap[x][y] += Math.abs(
