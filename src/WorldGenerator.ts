@@ -1,21 +1,12 @@
 import { app } from "./App";
-import BiomeGenerator from "./biomes/BiomeGenerator";
-import FractalNoise from "./noise/FractalNoise";
+import BiomeGenerator from "./biomes/SimpleBiomeGenerator";
+import FractalNoise from "./util/FractalNoise";
 import { Color, Map } from "./Types";
-import Util from "./Util";
+import MapUtils from "./util/MapUtils";
+import Distortion from "./util/Distortion";
 
 export default class WorldGenerator {
   private heightMap: Map<number>;
-
-  /*
-
-  later also for temp/moisture based worldgen!!
-
-
-  private tempMap: Map<number>;
-  private moistureMap: Map<number>;
-
-  */
 
   private finalColorMap: Map<Color>;
 
@@ -29,33 +20,22 @@ export default class WorldGenerator {
       app.detail
     );
 
-    /*
+    // this.heightMap = WorldGenerator.generateSquareMap(app.width, app.height);
 
-
-    later for temp/moisture based worldgen!
-
-
-    this.tempMap = WorldGenerator.generateNoiseMap(
-      (noiseVal) => noiseVal * worldNoiseScalar,
-      app.seed,
-      app.scale,
-      app.width,
-      app.height,
-      app.detail
+    this.heightMap = Distortion.distortMap(
+      this.heightMap,
+      250,
+      WorldGenerator.generateNoiseMap(
+        (val) => val,
+        50,
+        0.005,
+        app.width,
+        app.height,
+        8
+      )
     );
 
-    this.moistureMap = WorldGenerator.generateNoiseMap(
-      (noiseVal) => noiseVal * worldNoiseScalar,
-      app.seed,
-      app.scale,
-      app.width,
-      app.height,
-      app.detail
-    );
-
-    */
-
-    this.finalColorMap = Util.map2d<number, Color>(
+    this.finalColorMap = MapUtils.map2d<number, Color>(
       this.heightMap,
       (val, indices) => this.biomeGen.getBiome(val)
     );
@@ -76,6 +56,20 @@ export default class WorldGenerator {
       r[x] = [];
       for (let y = 0; y < height; ++y) {
         r[x][y] = generator(noise.makeNoise(x * noiseScale, y * noiseScale));
+      }
+    }
+
+    return r;
+  }
+
+  private static generateSquareMap(width: number, height: number): Map<number> {
+    let r: Map<number> = [];
+
+    for (let x = 0; x < width; ++x) {
+      r[x] = [];
+      for (let y = 0; y < height; ++y) {
+        if (x > 350 && y > 350 && x < 650 && y < 650) r[x][y] = 50;
+        else r[x][y] = 0;
       }
     }
 

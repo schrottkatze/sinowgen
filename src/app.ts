@@ -1,4 +1,4 @@
-import BiomeGenerator from "./biomes/BiomeGenerator";
+import BiomeGenerator from "./biomes/SimpleBiomeGenerator";
 import WorldGenerator from "./WorldGenerator";
 import Renderer from "./Renderer";
 import p5 from "p5";
@@ -8,10 +8,9 @@ class App {
   public readonly scale = 0.005;
   public readonly noiseFactor = 100;
 
-  public readonly height = 1080;
-  public readonly width = 1080;
+  public readonly height = 1000;
+  public readonly width = 1000;
 
-  // public readonly seed = Math.floor(Math.random() * 100000 + 1);
   public readonly seed = 0;
   public readonly detail = 8;
 

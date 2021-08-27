@@ -1,6 +1,6 @@
-import { Map } from "./Types";
+import { Map } from "../Types";
 
-export default class Util {
+export default class MapUtils {
   public static map2d<T, U>(
     array: Map<T>,
     cb: (val: T, indices: [number, number]) => U
