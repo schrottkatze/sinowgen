@@ -1,4 +1,4 @@
-import { Color } from "../Types";
+import Color, { colorArr } from "../util/Color";
 
 export default class SimpleBiome {
   constructor(
@@ -8,23 +8,31 @@ export default class SimpleBiome {
     private highColor: Color
   ) {}
 
-  public getColorCodeForHeightPos(height: number): Color | void {
+  public getColorForHeightPos(height: number): Color | void {
     const biomeMaxHeight = this.minGenerationHeight + this.biomeHeight;
 
     if (!(height >= this.minGenerationHeight && height <= biomeMaxHeight))
       return;
 
-    const relativeHeight =
-      (height - this.minGenerationHeight) / this.biomeHeight;
+    const colorDifferences: Color = this.lowColor.calculateDifference(
+      this.highColor
+    );
 
-    const colDiffs: Color = this.highColor.map(
-      (value, index) => value - this.lowColor[index]
-    ) as Color;
+    //const r: Color = colDiffs.map((value, index) =>
+    //Math.floor(value * this.getRelativeHeight(height) + this.lowColor[index])
+    //) as Color;
 
-    const r: Color = colDiffs.map((value, index) =>
-      Math.floor(value * relativeHeight + this.lowColor[index])
-    ) as Color;
+    const relativeHeight = this.getRelativeHeight(height);
 
-    return r;
+    return new Color(
+      colorDifferences.getRed() * relativeHeight + this.lowColor.getRed(),
+      colorDifferences.getGreen() * relativeHeight + this.lowColor.getGreen(),
+      colorDifferences.getBlue() * relativeHeight + this.lowColor.getBlue(),
+      colorDifferences.getAlpha() * relativeHeight + this.lowColor.getAlpha()
+    );
+  }
+
+  private getRelativeHeight(height: number): number {
+    return height - this.minGenerationHeight / this.biomeHeight;
   }
 }

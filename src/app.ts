@@ -30,18 +30,12 @@ class App {
   }
 
   public draw(p: p5): void {
-    const timeStart = Date.now();
-
     const biomeGen = new BiomeGenerator(BiomeMaps.gabrielBiomeMap);
     const worldGen = new WorldGenerator(biomeGen, 100);
     const renderer = new Renderer(worldGen.getColorMap());
 
-    const timeEnd = Date.now();
-    const processingTime = timeEnd - timeStart;
-
     renderer.render(p);
 
-    console.log(`Rendering complete in ${processingTime / 1000}s!`);
     p.noLoop();
   }
 }

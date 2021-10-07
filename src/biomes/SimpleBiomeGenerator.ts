@@ -1,5 +1,4 @@
-import { app } from "../App";
-import { Color, Map } from "../Types";
+import { Map } from "../Types";
 import SimpleBiome from "./SimpleBiome";
 
 export default class BiomeGenerator {
@@ -12,20 +11,5 @@ export default class BiomeGenerator {
     }
 
     return [255, 0, 0, 255];
-  }
-
-  private applyHeat(
-    temperatureMap: number[][],
-    heatLevel: number
-  ): Map<number> {
-    for (let x = 0; x < app.width; ++x) {
-      for (let y = 0; y < app.height; ++y) {
-        temperatureMap[x][y] += Math.abs(
-          Math.cos(y * Math.PI * (2 / app.height) + Math.PI) * heatLevel +
-            heatLevel
-        );
-      }
-    }
-    return temperatureMap;
   }
 }
