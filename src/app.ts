@@ -29,15 +29,18 @@ class App {
     }
 
     public draw(p: p5): void {
-        console.time("Map generation");
+        console.time("Map generation and rendering");
+        console.time("Worldgen");
 
         const biomeGen = new SimpleBiomeGenerator(BiomeMaps.gabrielBiomeMap);
         const worldGen = new WorldGenerator(biomeGen, 100);
-        const renderer = new Renderer(worldGen.getColorMap());
 
+        console.timeEnd("Worldgen");
+
+        const renderer = new Renderer(worldGen.getColorMap());
         renderer.render(p);
 
-        console.timeEnd("Map generation");
+        console.timeEnd("Map generation and rendering");
 
         p.noLoop();
     }

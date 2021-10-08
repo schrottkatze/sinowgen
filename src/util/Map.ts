@@ -1,7 +1,7 @@
 import Position from "./Position";
 
 export default class Map<T> {
-  private _map: (T | null)[][];
+  private readonly _map: (T | null)[][];
 
   constructor(private width: number, private height: number) {
     this._map = [];
@@ -27,7 +27,7 @@ export default class Map<T> {
     for (let x = 0; x < this.width; ++x) {
       for (let y = 0; y < this.height; ++y) {
         const pos = new Position(x, y);
-        result.setPosition(cb(this._map[x][y], pos), pos);
+        result.setPosition(cb(this.getPosition(pos), pos), pos);
       }
     }
 

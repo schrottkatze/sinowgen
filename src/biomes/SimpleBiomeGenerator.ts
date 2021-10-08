@@ -11,7 +11,7 @@ export default class SimpleBiomeGenerator {
             if (biomeColorValue) return biomeColorValue;
         }
 
-        console.error(`No biome found for height ${height}.`);
-        return new Color(20, 0, 0, 20);
+        // console.error(`No biome found for height ${height}.`);
+        return new Color(255, 0, 0, 255);
     }
 }
