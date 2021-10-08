@@ -21,14 +21,14 @@ export default class Color {
   }
 
   private isValid(): boolean {
-    if (!this.isValidValue(this.red, 255))
-      this.throwInvalidColorValueError("red");
-    if (!this.isValidValue(this.green, 255))
-      this.throwInvalidColorValueError("green");
-    if (!this.isValidValue(this.blue, 255))
-      this.throwInvalidColorValueError("blue");
-    if (!this.isValidValue(this.alpha, 100))
-      this.throwInvalidColorValueError("alpha");
+    if (!Color.isValidValue(this.red))
+      Color.throwInvalidColorValueError("red", this.red);
+    if (!Color.isValidValue(this.green))
+      Color.throwInvalidColorValueError("green", this.green);
+    if (!Color.isValidValue(this.blue))
+      Color.throwInvalidColorValueError("blue", this.blue);
+    if (!Color.isValidValue(this.alpha))
+      Color.throwInvalidColorValueError("alpha", this.alpha);
 
     return true;
   }
@@ -40,12 +40,12 @@ export default class Color {
     this.alpha = Math.round(this.alpha);
   }
 
-  private throwInvalidColorValueError(colorName: string): void {
-    throw new Error(`Invalid color value for ${colorName}.`);
+  private static throwInvalidColorValueError(colorName: string, colorValue: number): void {
+    throw new Error(`Invalid color value for ${colorName}: ${colorValue}`);
   }
 
-  private isValidValue(value: number, max: number): boolean {
-    return value <= max && value >= 0;
+  private static isValidValue(value: number): boolean {
+    return value <= 255 && value >= 0;
   }
 
   public getAsArray(): colorArr {
