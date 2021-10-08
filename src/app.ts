@@ -6,7 +6,6 @@ import BiomeMaps from "./biomes/BiomeMaps";
 
 class App {
     public readonly scale = 0.005;
-    public readonly noiseFactor = 100;
 
     public readonly height = window.innerHeight;
     public readonly width = window.innerWidth;

@@ -7,7 +7,7 @@ export default class Color {
     private blue: number,
     private alpha: number
   ) {
-    this.roundToInts();
+    this.roundValuesToInts();
     this.isValid();
   }
 
@@ -33,7 +33,7 @@ export default class Color {
     return true;
   }
 
-  private roundToInts(): void {
+  private roundValuesToInts(): void {
     this.red = Math.round(this.red);
     this.green = Math.round(this.green);
     this.blue = Math.round(this.blue);
