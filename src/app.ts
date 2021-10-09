@@ -1,16 +1,14 @@
 import SimpleBiomeGenerator from "./simple/SimpleBiomeGenerator";
-import SimpleWorldGenerator from "./simple/SimpleWorldGenerator";
 import Renderer from "./Renderer";
 import p5 from "p5";
 import SimpleBiomeMaps from "./simple/SimpleBiomeMaps";
-import NoiseMapGenerator from "./complex/noiseMapGenerators/NoiseMapGenerator";
 import HeightMapGenerator from "./complex/noiseMapGenerators/HeightMapGenerator";
 
 class App {
   public readonly scale = 0.05;
 
-  public readonly height = 1080;
-  public readonly width = 1080;
+  public readonly height = window.innerHeight;
+  public readonly width = window.innerWidth;
 
   public readonly seed = 0;
   public readonly detail = 8;

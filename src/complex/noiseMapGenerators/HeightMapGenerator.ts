@@ -16,12 +16,7 @@ export default class HeightMapGenerator extends NoiseMapGenerator {
   }
 
   protected generateMap(): Map<number> {
-    let result: Map<number>;
-
-    let maxValue = 0;
-    let minValue = 100;
-
-    result = this.map.forEach<number>(((value, position) => {
+    return this.map.forEach<number>(((value, position) => {
       let noiseGeneralHeightValue = this.bigNoiseGen.makeNoise(position.getScaled(this.bigNoiseGeneratorSettings.scale));
       let noiseDetailHeightValue = this.noiseGenerator.makeNoise(position.getScaled(this.settings.scale));
 
@@ -30,17 +25,8 @@ export default class HeightMapGenerator extends NoiseMapGenerator {
         noiseDetailHeightValue *= this.settings.relevance;
       }
 
-      const result = (noiseGeneralHeightValue + noiseDetailHeightValue + 1) / 2 * 100;
-
-      if (result > maxValue) maxValue = result;
-      if (result < minValue) minValue = result;
-
-      return result;
+      return (noiseGeneralHeightValue + noiseDetailHeightValue + 1) / 2 * 100;
     }));
-
-    console.log(`Max: ${maxValue}, Min: ${minValue}`);
-
-    return result;
   }
 
   public getColorMap(biomeGen: SimpleBiomeGenerator): Map<Color> {

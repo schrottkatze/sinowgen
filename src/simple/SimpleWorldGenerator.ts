@@ -28,6 +28,7 @@ export default class SimpleWorldGenerator {
 
     noiseMap = noiseMap.forEach<number>((value, position) => {
       return generator((noise.makeNoise(position.getScaled(app.scale)) + 1) / 2)
+
     });
 
     return noiseMap;
