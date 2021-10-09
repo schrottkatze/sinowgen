@@ -27,7 +27,7 @@ export default class SimpleWorldGenerator {
     let noiseMap = new Map<number>(app.width, app.height);
 
     noiseMap = noiseMap.forEach<number>((value, position) => {
-      return generator(noise.makeNoise(position.x * app.scale, position.y * app.scale))
+      return generator(noise.makeNoise(position.getScaled(app.scale)))
     });
 
     return noiseMap;

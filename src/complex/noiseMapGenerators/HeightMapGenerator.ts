@@ -14,7 +14,7 @@ export default class HeightMapGenerator extends NoiseMapGenerator {
     let result: Map<number>;
 
     result = this.map.forEach<number>(((value, position) => {
-      return this.noiseGenerator.makeNoise(position.x * scale, position.y * scale) * 255;
+      return this.noiseGenerator.makeNoise(position.getScaled(scale)) * 255;
     }));
 
     return result;
