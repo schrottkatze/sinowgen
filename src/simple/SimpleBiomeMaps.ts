@@ -1,7 +1,7 @@
 import SimpleBiome from "./SimpleBiome";
 import Color from "../util/Color";
 
-export default class BiomeMaps {
+export default class SimpleBiomeMaps {
   public static gabrielBiomeMap: SimpleBiome[] = [
     new SimpleBiome(
         0,

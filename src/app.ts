@@ -1,8 +1,8 @@
-import SimpleBiomeGenerator from "./biomes/SimpleBiomeGenerator";
-import WorldGenerator from "./WorldGenerator";
+import SimpleBiomeGenerator from "./simple/SimpleBiomeGenerator";
+import SimpleWorldGenerator from "./simple/SimpleWorldGenerator";
 import Renderer from "./Renderer";
 import p5 from "p5";
-import BiomeMaps from "./biomes/BiomeMaps";
+import SimpleBiomeMaps from "./simple/SimpleBiomeMaps";
 
 class App {
     public readonly scale = 0.005;
@@ -32,8 +32,8 @@ class App {
         console.time("Map generation and rendering");
         console.time("Worldgen");
 
-        const biomeGen = new SimpleBiomeGenerator(BiomeMaps.gabrielBiomeMap);
-        const worldGen = new WorldGenerator(biomeGen, 100);
+        const biomeGen = new SimpleBiomeGenerator(SimpleBiomeMaps.gabrielBiomeMap);
+        const worldGen = new SimpleWorldGenerator(biomeGen, 100);
 
         console.timeEnd("Worldgen");
 

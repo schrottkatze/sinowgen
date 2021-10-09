@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "compile": "npx webpack",
-    "compile and watch": "npx webpack --watch & npx serve"
+    "compile and watch": "npx webpack --watch & (cd ./dist && npx serve)"
   },
   "dependencies": {
     "@types/p5": "^1.3.0",
