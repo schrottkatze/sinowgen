@@ -7,10 +7,10 @@ import NoiseMapGenerator from "./complex/noiseMapGenerators/NoiseMapGenerator";
 import HeightMapGenerator from "./complex/noiseMapGenerators/HeightMapGenerator";
 
 class App {
-  public readonly scale = 0.005;
+  public readonly scale = 0.05;
 
-  public readonly height = window.innerHeight;
-  public readonly width = window.innerWidth;
+  public readonly height = 1080;
+  public readonly width = 1080;
 
   public readonly seed = 0;
   public readonly detail = 8;
@@ -34,18 +34,25 @@ class App {
     console.time("Map generation and rendering");
     console.time("Worldgen");
 
-    // const biomeGen = new SimpleBiomeGenerator(SimpleBiomeMaps.gabrielBiomeMap);
+    const biomeGen = new SimpleBiomeGenerator(SimpleBiomeMaps.gabrielBiomeMap);
     // const worldGen = new SimpleWorldGenerator(biomeGen, 100);
-    const worldGen = new HeightMapGenerator({
+
+    const wg = new HeightMapGenerator({
       seed: this.seed,
       detail: this.detail,
       scale: this.scale,
-      upperBound: 255,
+      relevance: 0.2,
+    }, {
+      seed: this.seed + 1,
+      detail: 2,
+      scale: this.scale * 0.1,
+      relevance: 0.8,
     }, this.width, this.height);
 
     console.timeEnd("Worldgen");
 
-    const renderer = new Renderer(worldGen.testingGetColorMap());
+    const renderer = new Renderer(wg.getColorMap(biomeGen));
+    // const renderer = new Renderer(worldGen.getColorMap())
     renderer.render(p);
 
     console.timeEnd("Map generation and rendering");

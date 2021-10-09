@@ -5,18 +5,25 @@ import Position from "./Position";
 export default class FractalNoise {
   private readonly noise2d: Noise2D;
 
-  constructor(private seed: number, private detail?: number) {
+  constructor(private seed: number, private octaves: number) {
     this.noise2d = openSimplex.makeNoise2D(seed);
   }
 
   makeNoise(pos: Position): number {
     let r = 0;
 
-    for (let i = 0; i < (this.detail || 4); ++i) {
-      const factor = Math.pow(2, i);
-      r += (this.noise2d(pos.x * factor, pos.y * factor) + 1) / 2 / factor;
+    for (let i = 0; i < this.octaves; ++i) {
+      const factor = 2 ** i;
+      r += this.noise2d(pos.x * factor, pos.y * factor) / factor;
     }
 
-    return r / 2;
+    return FractalNoise.clip(r);
+  }
+
+  private static clip(val: number): number {
+    // 0.999 to fix some weird stuff with 0 not being recognized?
+    if (val <= -1) return -0.999;
+    if (val >= 1) return 0.999;
+    return val;
   }
 }

@@ -5,25 +5,25 @@ export default class SimpleBiomeMaps {
   public static gabrielBiomeMap: SimpleBiome[] = [
     new SimpleBiome(
         0,
-        35,
+        50,
         new Color(10, 28, 38, 255),
         new Color(49, 87, 115, 255),
     ), // ocean
     new SimpleBiome(
-        35,
-        10,
+        50,
+        5,
         new Color(129, 125, 120, 255),
         new Color(164, 158, 140, 255),
     ), // beach
     new SimpleBiome(
-        45,
+        55,
         20,
         new Color(50, 57, 18, 255),
         new Color(91, 93, 46, 255),
     ), // forest
     new SimpleBiome(
-        65,
-        35,
+        75,
+        25,
         new Color(105, 105, 105, 255),
         new Color(205, 200, 200, 255),
     ), // mountains

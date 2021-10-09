@@ -3,12 +3,19 @@ import FractalNoise from "../../util/FractalNoise";
 import Map from "../../util/Map";
 
 export default abstract class NoiseMapGenerator {
-  protected constructor(private settings: NoiseGeneratorSettings, width: number, height: number) {
+  private readonly _settings: NoiseGeneratorSettings;
+  private _noiseGenerator: FractalNoise;
+  private _map: Map<number>;
+
+  protected constructor(settings: NoiseGeneratorSettings, width: number, height: number) {
+    this._settings = settings;
     this._noiseGenerator = new FractalNoise(settings.seed, settings.detail);
     this._map = new Map<number>(width, height);
   }
 
-  private _noiseGenerator: FractalNoise;
+  get settings(): NoiseGeneratorSettings {
+    return this._settings;
+  }
 
   get noiseGenerator(): FractalNoise {
     return this._noiseGenerator;
@@ -18,8 +25,6 @@ export default abstract class NoiseMapGenerator {
     this._noiseGenerator = value;
   }
 
-  private _map: Map<number>;
-
   get map(): Map<number> {
     return this._map;
   }
@@ -28,5 +33,5 @@ export default abstract class NoiseMapGenerator {
     this._map = value;
   }
 
-  protected abstract generateMap(scale: number): Map<number>
+  protected abstract generateMap(): Map<number>
 }

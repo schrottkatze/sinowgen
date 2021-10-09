@@ -2,5 +2,6 @@ export default interface NoiseGeneratorSettings {
   seed: number;
   scale: number;
   detail: number;
-  upperBound: number;
+  upperBound?: number;
+  relevance?: number;
 }
