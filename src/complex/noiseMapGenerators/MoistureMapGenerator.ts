@@ -8,12 +8,14 @@ export default class MoistureMapGenerator extends NoiseMapGenerator {
   constructor(settings: NoiseGeneratorSettings, width: number, height: number, heatMap: Map<number>) {
     super(settings, width, height);
     this.heatMap = heatMap;
+
+    this.map = this.generateMap()
   }
 
   protected generateMap(): Map<number> {
     return this.map.forEach((value, position) => {
       // TODO: Make algorithm depend on heat map
-      return this.noiseGenerator.makeNoise(position.getScaled(this.settings.scale));
+      return (this.noiseGenerator.makeNoise(position.getScaled(this.settings.scale)) + 1) / 2 * 255;
     });
   }
 }

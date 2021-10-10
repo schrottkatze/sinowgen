@@ -17,13 +17,13 @@ export default class SimpleBiomeMaps {
     ), // beach
     new SimpleBiome(
         55,
-        20,
+        25,
         new Color(50, 57, 18, 255),
         new Color(91, 93, 46, 255),
     ), // forest
     new SimpleBiome(
-        75,
-        25,
+        80,
+        20,
         new Color(105, 105, 105, 255),
         new Color(205, 200, 200, 255),
     ), // mountains
@@ -75,5 +75,14 @@ export default class SimpleBiomeMaps {
         new Color(56, 31, 0, 255),
         new Color(255, 255, 255, 255),
     ),
+  ];
+
+  public static demoBiomeMap: SimpleBiome[] = [
+      new SimpleBiome(
+          0,
+          100,
+          new Color(0,0,0,255),
+          new Color(255,255,255,255)
+      )
   ];
 }

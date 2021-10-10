@@ -21,10 +21,6 @@ export default abstract class NoiseMapGenerator {
     return this._noiseGenerator;
   }
 
-  set noiseGenerator(value: FractalNoise) {
-    this._noiseGenerator = value;
-  }
-
   get map(): Map<number> {
     return this._map;
   }
