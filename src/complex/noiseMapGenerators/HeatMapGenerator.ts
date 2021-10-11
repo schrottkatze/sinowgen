@@ -9,7 +9,7 @@ export default class HeatMapGenerator extends NoiseMapGenerator {
     super(settings, width, height);
     this.heightMap = heightMap;
 
-    this.map = this.generateMap()
+    this.map = this.generateMap();
   }
 
   protected generateMap(): Map<number> {

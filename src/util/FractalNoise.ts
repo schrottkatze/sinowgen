@@ -9,6 +9,13 @@ export default class FractalNoise {
     this.noise2d = openSimplex.makeNoise2D(seed);
   }
 
+  private static clip(val: number): number {
+    // 0.999 to fix some weird stuff with 0 not being recognized?
+    if (val <= -1) return -0.999;
+    if (val >= 1) return 1;
+    return val;
+  }
+
   makeNoise(pos: Position): number {
     let r = 0;
 
@@ -18,12 +25,5 @@ export default class FractalNoise {
     }
 
     return FractalNoise.clip(r);
-  }
-
-  private static clip(val: number): number {
-    // 0.999 to fix some weird stuff with 0 not being recognized?
-    if (val <= -1) return -0.999;
-    if (val >= 1) return 1;
-    return val;
   }
 }

@@ -3,18 +3,16 @@ import Renderer from "./Renderer";
 import p5 from "p5";
 import SimpleBiomeMaps from "./simple/SimpleBiomeMaps";
 import HeightMapGenerator from "./complex/noiseMapGenerators/HeightMapGenerator";
-import SimpleWorldGenerator from "./simple/SimpleWorldGenerator";
 import HeatMapGenerator from "./complex/noiseMapGenerators/HeatMapGenerator";
 import MoistureMapGenerator from "./complex/noiseMapGenerators/MoistureMapGenerator";
 import GroundHardnessMapGenerator from "./complex/noiseMapGenerators/GroundHardnessMapGenerator";
-import Position from "./util/Position";
 
 class App {
-  public readonly height = window.innerHeight;
-  public readonly width = window.innerWidth;
+  public readonly height = 1080;
+  public readonly width = 1080;
 
-  public readonly seed = 1633948171861;
-  public readonly scale = 0.025;
+  public readonly seed = 1633946866988;
+  public readonly scale = 0.05;
 
   public readonly detail = 8;
 
@@ -45,12 +43,12 @@ class App {
       seed: this.seed,
       detail: 8,
       scale: this.scale,
-      relevance: 0.15,
+      relevance: 0.2,
     }, {
       seed: this.seed + 1,
       detail: 4,
       scale: this.scale * 0.075,
-      relevance: 0.85,
+      relevance: 0.8,
     }, this.width, this.height);
 
     const heatMapGenerator = new HeatMapGenerator({
@@ -65,11 +63,18 @@ class App {
       seed: this.seed + 3,
     }, this.width, this.height, heatMapGenerator.map);
 
-    const groundHardnessMapGenerator = new GroundHardnessMapGenerator({
-      detail: 4,
-      scale: this.scale * 1.5,
-      seed: this.seed + 4,
-    }, this.width, this.height, heatMapGenerator.map, moistureMapGenerator.map, heightMapGenerator.map);
+    const groundHardnessMapGenerator = new GroundHardnessMapGenerator(
+        {
+          detail: 4,
+          scale: this.scale * 1.5,
+          seed: this.seed + 4,
+        },
+        this.width,
+        this.height,
+        heatMapGenerator.map,
+        moistureMapGenerator.map,
+        heightMapGenerator.map,
+    );
 
     console.timeEnd("Worldgen");
 

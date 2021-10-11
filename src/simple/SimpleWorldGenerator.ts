@@ -2,7 +2,7 @@ import { app } from "../App";
 import SimpleBiomeGenerator from "./SimpleBiomeGenerator";
 import FractalNoise from "../util/FractalNoise";
 import Map from "../util/Map";
-import Color from "../util/Color"
+import Color from "../util/Color";
 
 export default class SimpleWorldGenerator {
   private readonly heightMap: Map<number>;
@@ -27,7 +27,7 @@ export default class SimpleWorldGenerator {
     let noiseMap = new Map<number>(app.width, app.height);
 
     noiseMap = noiseMap.forEach<number>((value, position) => {
-      return generator((noise.makeNoise(position.getScaled(app.scale)) + 1) / 2)
+      return generator((noise.makeNoise(position.getScaled(app.scale)) + 1) / 2);
 
     });
 

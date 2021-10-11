@@ -1,4 +1,4 @@
-# README
+# SiNoWGen
 
 ## Build and run
 
@@ -8,3 +8,4 @@
 ## Good seeds
 
 - 1633946866988
+- 1633948171861

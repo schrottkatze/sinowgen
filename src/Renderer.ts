@@ -8,10 +8,10 @@ export default class Renderer {
 
   render(p: p5) {
     this.colorMap.forEach((value, position) => {
-      if (value) p.set(position.x, position.y, value.getAsArray());
-      else throw new Error(`Error during rendering: no color value at ${position.toString()}`);
-    }
-  )
+          if (value) p.set(position.x, position.y, value.getAsArray());
+          else throw new Error(`Error during rendering: no color value at ${position.toString()}`);
+        },
+    );
 
     p.updatePixels();
   }

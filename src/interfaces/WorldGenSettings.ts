@@ -7,5 +7,5 @@ export default interface WorldGenSettings {
     groundHardness: NoiseGeneratorSettings;
     heatMap: NoiseGeneratorSettings;
     moisture: NoiseGeneratorSettings;
-  }
+  };
 }

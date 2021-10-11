@@ -4,14 +4,6 @@ export default class Position {
     this._x = x;
   }
 
-  public getScaled(scale: number): Position {
-    return new Position(this.x * scale, this.y * scale);
-  }
-
-  public toString() {
-    return `x: ${this._x}, y: ${this._y}`;
-  }
-
   private _x: number;
 
   get x(): number {
@@ -30,5 +22,13 @@ export default class Position {
 
   set y(value: number) {
     this._y = value;
+  }
+
+  public getScaled(scale: number): Position {
+    return new Position(this.x * scale, this.y * scale);
+  }
+
+  public toString() {
+    return `x: ${this._x}, y: ${this._y}`;
   }
 }

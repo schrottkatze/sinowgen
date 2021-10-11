@@ -6,15 +6,15 @@ export default abstract class BiomeRegistry {
     this._registryIdentifier = registryIdentifier;
   }
 
+  get registryIdentifier(): string {
+    return this._registryIdentifier;
+  }
+
   public register(biome: object, key: string) {
     this.registry[key] = biome;
   }
 
   public getRegistryObject(key: string): object {
     return this.registry[key];
-  }
-
-  get registryIdentifier(): string {
-    return this._registryIdentifier;
   }
 }

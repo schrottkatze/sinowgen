@@ -7,13 +7,20 @@ export default class GroundHardnessMapGenerator extends NoiseMapGenerator {
   private moistureMap: Map<number>;
   private heightMap: Map<number>;
 
-  constructor(settings: NoiseGeneratorSettings, width: number, height: number, heatMap: Map<number>, moistureMap: Map<number>, heightMap: Map<number>) {
+  constructor(
+      settings: NoiseGeneratorSettings,
+      width: number,
+      height: number,
+      heatMap: Map<number>,
+      moistureMap: Map<number>,
+      heightMap: Map<number>,
+  ) {
     super(settings, width, height);
     this.heatMap = heatMap;
     this.moistureMap = moistureMap;
     this.heightMap = heightMap;
 
-    this.map = this.generateMap()
+    this.map = this.generateMap();
   }
 
   protected generateMap(): Map<number> {

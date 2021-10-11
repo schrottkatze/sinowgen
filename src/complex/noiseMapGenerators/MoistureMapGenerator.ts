@@ -9,7 +9,7 @@ export default class MoistureMapGenerator extends NoiseMapGenerator {
     super(settings, width, height);
     this.heatMap = heatMap;
 
-    this.map = this.generateMap()
+    this.map = this.generateMap();
   }
 
   protected generateMap(): Map<number> {

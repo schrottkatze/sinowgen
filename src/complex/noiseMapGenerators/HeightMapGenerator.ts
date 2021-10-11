@@ -8,11 +8,29 @@ import SimpleBiomeGenerator from "../../simple/SimpleBiomeGenerator";
 export default class HeightMapGenerator extends NoiseMapGenerator {
   private bigNoiseGen: FractalNoise;
 
-  constructor(detailGeneratorSettings: NoiseGeneratorSettings, private bigNoiseGeneratorSettings: NoiseGeneratorSettings, width: number, height: number) {
+  constructor(
+      detailGeneratorSettings: NoiseGeneratorSettings,
+      private bigNoiseGeneratorSettings: NoiseGeneratorSettings,
+      width: number,
+      height: number,
+  ) {
     super(detailGeneratorSettings, width, height);
     this.bigNoiseGen = new FractalNoise(bigNoiseGeneratorSettings.seed, bigNoiseGeneratorSettings.detail);
 
     this.map = this.generateMap();
+  }
+
+  public getColorMap(biomeGen: SimpleBiomeGenerator): Map<Color> {
+    let colorMap: Map<Color>;
+
+    colorMap = this.map.forEach(value => {
+      // if (value) return new Color(value, value, value, 255);
+      // else return new Color(255, 0, 0, 255);
+      if (value) return biomeGen.getBiome(value);
+      else return new Color(255, 0, 0, 255);
+    });
+
+    return colorMap;
   }
 
   protected generateMap(): Map<number> {
@@ -27,18 +45,5 @@ export default class HeightMapGenerator extends NoiseMapGenerator {
 
       return (noiseGeneralHeightValue + noiseDetailHeightValue + 1) / 2 * 100;
     }));
-  }
-
-  public getColorMap(biomeGen: SimpleBiomeGenerator): Map<Color> {
-    let colorMap: Map<Color>;
-
-    colorMap = this.map.forEach(value => {
-      // if (value) return new Color(value, value, value, 255);
-      // else return new Color(255, 0, 0, 255);
-      if (value) return biomeGen.getBiome(value);
-      else return new Color(255, 0, 0, 255);
-    });
-
-    return colorMap;
   }
 }
