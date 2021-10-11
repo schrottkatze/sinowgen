@@ -1,7 +1,7 @@
 enum GroundHardnessLevels {
-  VERY_HARD,
-  SEMI_HARD,
-  MEDIUM,
-  SEMI_SOFT,
-  VERY_SOFT,
+  VERY_SOFT = -256,
+  SEMI_SOFT = -128,
+  MEDIUM = 0,
+  SEMI_HARD = 127,
+  VERY_HARD = 255,
 }

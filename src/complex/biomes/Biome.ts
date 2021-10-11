@@ -18,4 +18,6 @@ export default abstract class Biome {
     this.heightArea = heightArea;
     this.category = category;
   }
+
+  abstract calculateMatchingScore(): number
 }

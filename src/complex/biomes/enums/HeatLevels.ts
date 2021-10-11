@@ -1,7 +1,7 @@
 enum HeatLevels {
-  FREEZING,
-  COOL,
-  MEDIUM,
-  WARM,
-  HOT
+  FREEZING = -256,
+  COOL = -64,
+  MEDIUM = 0,
+  WARM = 63,
+  HOT = 255
 }

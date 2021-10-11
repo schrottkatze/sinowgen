@@ -8,8 +8,8 @@ import MoistureMapGenerator from "./complex/noiseMapGenerators/MoistureMapGenera
 import GroundHardnessMapGenerator from "./complex/noiseMapGenerators/GroundHardnessMapGenerator";
 
 class App {
-  public readonly height = 1080;
-  public readonly width = 1080;
+  public readonly height = 4096;
+  public readonly width = 4096;
 
   public readonly seed = 1633946866988;
   public readonly scale = 0.05;
