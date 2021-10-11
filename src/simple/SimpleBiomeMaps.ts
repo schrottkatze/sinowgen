@@ -78,11 +78,11 @@ export default class SimpleBiomeMaps {
   ];
 
   public static demoBiomeMap: SimpleBiome[] = [
-      new SimpleBiome(
-          0,
-          100,
-          new Color(0,0,0,255),
-          new Color(255,255,255,255)
-      )
+    new SimpleBiome(
+        0,
+        100,
+        new Color(0, 0, 0, 255),
+        new Color(255, 255, 255, 255),
+    ),
   ];
 }

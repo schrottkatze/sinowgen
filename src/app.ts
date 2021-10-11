@@ -10,10 +10,10 @@ import GroundHardnessMapGenerator from "./complex/noiseMapGenerators/GroundHardn
 import Position from "./util/Position";
 
 class App {
-  public readonly height = 1080;
-  public readonly width = 1080;
+  public readonly height = window.innerHeight;
+  public readonly width = window.innerWidth;
 
-  public readonly seed = Date.now();
+  public readonly seed = 1633948171861;
   public readonly scale = 0.025;
 
   public readonly detail = 8;
@@ -48,8 +48,8 @@ class App {
       relevance: 0.15,
     }, {
       seed: this.seed + 1,
-      detail: 2,
-      scale: this.scale * 0.15,
+      detail: 4,
+      scale: this.scale * 0.075,
       relevance: 0.85,
     }, this.width, this.height);
 

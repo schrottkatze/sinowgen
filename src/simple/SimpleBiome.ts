@@ -26,6 +26,6 @@ export default class SimpleBiome {
     }
 
     private getRelativeHeight(height: number): number {
-        return (height - this.minGenerationHeight) / this.biomeHeight;
+        return Math.abs((height - this.minGenerationHeight) / this.biomeHeight);
     }
 }
