@@ -1,8 +1,14 @@
+import Color from "../../util/Color";
+
 export default abstract class Biome {
   private optimalHeat: HeatLevels;
   private optimalMoisture: MoistureLevels;
   private optimalGroundHardness: GroundHardnessLevels;
   private heightArea: HeightLevels;
+
+  abstract lowestPointColors: BiomeColorSet;
+  abstract highestPointColors: BiomeColorSet;
+
   private category: BiomeCategories;
 
   protected constructor(
@@ -20,4 +26,14 @@ export default abstract class Biome {
   }
 
   abstract calculateMatchingScore(): number
+
+  abstract getColorFromValues(): Color
+}
+
+export interface BiomeColorSet {
+  optimalConditions: Color;
+  tooCold: Color;
+  tooHot: Color;
+  tooDry: Color;
+  tooMoist: Color;
 }

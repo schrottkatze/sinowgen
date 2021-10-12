@@ -85,18 +85,13 @@ export default class SimpleBiomeMaps {
         new Color(255, 255, 255, 255),
     ),
   ];
-  public static logoBiomeMap: SimpleBiome[] = [
-    new SimpleBiome(
-        0,
-        50,
-        new Color(35, 71, 133, 255),
-        new Color(35, 71, 133, 255),
-    ),
-    new SimpleBiome(
-        50,
-        50,
-        new Color(92, 191, 29, 255),
-        new Color(92, 191, 29, 255),
-    ),
-  ];
+
+  // public static nixxBiomeMap: SimpleBiome[] = [
+  //     new SimpleBiome(
+  //         0,
+  //         100,
+  //         new Color(86, 130, 120,255),
+  //         new Color(225,225,225,255),
+  //     ), // tundra
+  // ];
 }

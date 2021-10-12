@@ -2,19 +2,13 @@ import SimpleBiomeGenerator from "./simple/SimpleBiomeGenerator";
 import Renderer from "./Renderer";
 import p5 from "p5";
 import SimpleBiomeMaps from "./simple/SimpleBiomeMaps";
+import Registration from "./complex/Registration";
+import GeneratorRegistry from "./complex/noiseMapGenerators/GeneratorRegistry";
 import HeightMapGenerator from "./complex/noiseMapGenerators/HeightMapGenerator";
-import HeatMapGenerator from "./complex/noiseMapGenerators/HeatMapGenerator";
-import MoistureMapGenerator from "./complex/noiseMapGenerators/MoistureMapGenerator";
-import GroundHardnessMapGenerator from "./complex/noiseMapGenerators/GroundHardnessMapGenerator";
 
 class App {
-  public readonly height = 4096;
-  public readonly width = 4096;
-
-  public readonly seed = 1633946866988;
-  public readonly scale = 0.05;
-
-  public readonly detail = 8;
+  public readonly HEIGHT = window.innerHeight;
+  public readonly WIDTH = window.innerWidth;
 
   private instance: p5;
 
@@ -26,59 +20,26 @@ class App {
   }
 
   public setup(p: p5): void {
-    p.createCanvas(this.width, this.height);
+    p.createCanvas(this.WIDTH, this.HEIGHT);
     p.background(255, 0, 0);
     p.noStroke();
   }
 
   public draw(p: p5): void {
-    console.log(`Seed: ${this.seed}`);
+    console.log(`Seed: ${GeneratorRegistry.BASE_SEED}`);
     console.time("Map generation and rendering");
     console.time("Worldgen");
 
+    Registration.register();
     const biomeGen = new SimpleBiomeGenerator(SimpleBiomeMaps.gabrielBiomeMap);
     // const worldGen = new SimpleWorldGenerator(biomeGen, 100);
 
-    const heightMapGenerator = new HeightMapGenerator({
-      seed: this.seed,
-      detail: 8,
-      scale: this.scale,
-      relevance: 0.2,
-    }, {
-      seed: this.seed + 1,
-      detail: 4,
-      scale: this.scale * 0.075,
-      relevance: 0.8,
-    }, this.width, this.height);
-
-    const heatMapGenerator = new HeatMapGenerator({
-      detail: 2,
-      scale: this.scale * 0.5,
-      seed: this.seed + 2,
-    }, this.width, this.height, heightMapGenerator.map);
-
-    const moistureMapGenerator = new MoistureMapGenerator({
-      detail: 6,
-      scale: this.scale * 1.25,
-      seed: this.seed + 3,
-    }, this.width, this.height, heatMapGenerator.map);
-
-    const groundHardnessMapGenerator = new GroundHardnessMapGenerator(
-        {
-          detail: 4,
-          scale: this.scale * 1.5,
-          seed: this.seed + 4,
-        },
-        this.width,
-        this.height,
-        heatMapGenerator.map,
-        moistureMapGenerator.map,
-        heightMapGenerator.map,
-    );
 
     console.timeEnd("Worldgen");
 
-    const renderer = new Renderer(heightMapGenerator.getColorMap(biomeGen));
+    const heightMapGen = Registration.NOISE_GENERATOR_REGISTRY.get("height_map_generator") as HeightMapGenerator;
+
+    const renderer = new Renderer(heightMapGen.getColorMap(biomeGen));
     /// const renderer = new Renderer(worldGen.getColorMap())
     renderer.render(p);
 

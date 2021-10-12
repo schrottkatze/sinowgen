@@ -6,16 +6,19 @@ import FractalNoise from "../../util/FractalNoise";
 import SimpleBiomeGenerator from "../../simple/SimpleBiomeGenerator";
 
 export default class HeightMapGenerator extends NoiseMapGenerator {
-  private bigNoiseGen: FractalNoise;
+  private terrainShapeGenerator: FractalNoise;
 
   constructor(
       detailGeneratorSettings: NoiseGeneratorSettings,
-      private bigNoiseGeneratorSettings: NoiseGeneratorSettings,
+      private terrainShapeGeneratorSettings: NoiseGeneratorSettings,
       width: number,
       height: number,
   ) {
     super(detailGeneratorSettings, width, height);
-    this.bigNoiseGen = new FractalNoise(bigNoiseGeneratorSettings.seed, bigNoiseGeneratorSettings.detail);
+    this.terrainShapeGenerator = new FractalNoise(
+        terrainShapeGeneratorSettings.seed,
+        terrainShapeGeneratorSettings.detail,
+    );
 
     this.map = this.generateMap();
   }
@@ -35,11 +38,11 @@ export default class HeightMapGenerator extends NoiseMapGenerator {
 
   protected generateMap(): Map<number> {
     return this.map.forEach<number>(((value, position) => {
-      let noiseGeneralHeightValue = this.bigNoiseGen.makeNoise(position.getScaled(this.bigNoiseGeneratorSettings.scale));
+      let noiseGeneralHeightValue = this.terrainShapeGenerator.makeNoise(position.getScaled(this.terrainShapeGeneratorSettings.scale));
       let noiseDetailHeightValue = this.noiseGenerator.makeNoise(position.getScaled(this.settings.scale));
 
-      if (this.bigNoiseGeneratorSettings.relevance && this.settings.relevance) {
-        noiseGeneralHeightValue *= this.bigNoiseGeneratorSettings.relevance;
+      if (this.terrainShapeGeneratorSettings.relevance && this.settings.relevance) {
+        noiseGeneralHeightValue *= this.terrainShapeGeneratorSettings.relevance;
         noiseDetailHeightValue *= this.settings.relevance;
       }
 
