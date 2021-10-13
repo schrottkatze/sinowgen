@@ -27,8 +27,6 @@ export default class HeightMapGenerator extends NoiseMapGenerator {
     let colorMap: Map<Color>;
 
     colorMap = this.map.forEach(value => {
-      // if (value) return new Color(value, value, value, 255);
-      // else return new Color(255, 0, 0, 255);
       if (value) return biomeGen.getBiome(value);
       else return new Color(255, 0, 0, 255);
     });

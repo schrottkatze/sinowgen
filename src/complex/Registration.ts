@@ -10,7 +10,7 @@ export default class Registration {
   public static register(): void {
     console.time("Registration");
 
-    Registration.NOISE_GENERATOR_REGISTRY.registerGenerators()
+    Registration.NOISE_GENERATOR_REGISTRY.registerGenerators();
     Registration.registerBiomes();
 
     console.timeEnd("Registration");

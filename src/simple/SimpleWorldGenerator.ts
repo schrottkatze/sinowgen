@@ -3,6 +3,7 @@ import SimpleBiomeGenerator from "./SimpleBiomeGenerator";
 import FractalNoise from "../util/FractalNoise";
 import Map from "../util/Map";
 import Color from "../util/Color";
+import GeneratorRegistry from "../complex/noiseMapGenerators/GeneratorRegistry";
 
 export default class SimpleWorldGenerator {
   private readonly heightMap: Map<number>;
@@ -23,11 +24,11 @@ export default class SimpleWorldGenerator {
   private static generateNoiseMap(
       generator: (noiseVal: number) => number,
   ): Map<number> {
-    const noise = new FractalNoise(app.seed, app.detail);
-    let noiseMap = new Map<number>(app.width, app.height);
+    const noise = new FractalNoise(GeneratorRegistry.BASE_SEED, 8);
+    let noiseMap = new Map<number>(app.WIDTH, app.HEIGHT);
 
     noiseMap = noiseMap.forEach<number>((value, position) => {
-      return generator((noise.makeNoise(position.getScaled(app.scale)) + 1) / 2);
+      return generator((noise.makeNoise(position.getScaled(GeneratorRegistry.BASE_SCALE)) + 1) / 2);
 
     });
 

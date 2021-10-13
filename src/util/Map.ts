@@ -1,3 +1,5 @@
+// noinspection FunctionWithMultipleLoopsJS
+
 import Position from "./Position";
 
 export default class Map<T> {
@@ -21,6 +23,7 @@ export default class Map<T> {
     return this._map[position.x][position.y];
   }
 
+  // noinspection FunctionWithMultipleLoopsJS
   public forEach<U>(cb: (value: T | null, position: Position) => U): Map<U> {
     let result = new Map<U>(this.width, this.height);
 

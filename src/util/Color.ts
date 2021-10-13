@@ -1,3 +1,5 @@
+// noinspection AssignmentToFunctionParameterJS
+
 export type colorArr = [ number, number, number, number ];
 
 export default class Color {
@@ -7,7 +9,7 @@ export default class Color {
       private blue: number,
       private alpha: number,
   ) {
-    this.roundValuesToInts();
+    this.roundValuesToIntegers();
     this.isValid();
   }
 
@@ -48,6 +50,7 @@ export default class Color {
     return this.alpha;
   }
 
+  // noinspection FunctionWithMoreThanThreeNegationsJS
   private isValid(): boolean {
     if (!Color.isValidValue(this.red))
       Color.throwInvalidColorValueError("red", this.red);
@@ -61,7 +64,7 @@ export default class Color {
     return true;
   }
 
-  private roundValuesToInts(): void {
+  private roundValuesToIntegers(): void {
     this.red = Math.round(this.red);
     this.green = Math.round(this.green);
     this.blue = Math.round(this.blue);

@@ -11,7 +11,7 @@ export default abstract class NoiseMapGenerator {
     this._map = new Map<number>(width, height);
   }
 
-  private _noiseGenerator: FractalNoise;
+  private readonly _noiseGenerator: FractalNoise;
 
   get noiseGenerator(): FractalNoise {
     return this._noiseGenerator;
