@@ -1,28 +1,22 @@
-import Biome, { BiomeColorSet, biomeValueRange } from "../biomeGeneration/Biome";
+import Biome, { BiomeColorSet, BiomeValueRangeSet } from "../biomeGeneration/Biome";
 import Color from "../../util/Color";
 
 export default class BasicBiome extends Biome {
+  private lowestPointColors: BiomeColorSet;
+  public highestPointColors: BiomeColorSet;
 
   constructor(
-      heatRange: biomeValueRange<HeatLevels>,
-      moistureRange: biomeValueRange<MoistureLevels>,
-      groundHardnessRange: biomeValueRange<GroundHardnessLevels>,
-      heightRange: biomeValueRange<HeightLevels>,
+      valueRanges: BiomeValueRangeSet,
       category: BiomeCategories,
+      highestPointColors: BiomeColorSet,
+      lowestPointColors: BiomeColorSet,
   ) {
-    super(heatRange, moistureRange, groundHardnessRange, heightRange, category);
-
+    super(valueRanges, category);
+    this.highestPointColors = highestPointColors;
+    this.lowestPointColors = lowestPointColors;
   }
 
-  calculateMatchingScore(): number {
-    return 0;
+  public getColorFromValues(): Color {
+    return new Color(0, 0, 0, 0);
   }
-
-  getColorFromValues(): Color {
-    return new Color(0,0,0,0);
-  }
-
-  private highestPointColors: BiomeColorSet;
-  private lowestPointColors: BiomeColorSet;
-
 }
