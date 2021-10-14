@@ -7,7 +7,7 @@ import { app } from "../../App";
 
 export default class GeneratorRegistry {
 
-  public static readonly BASE_SEED = 1634029028419;
+  public static readonly BASE_SEED = Date.now();
   public static readonly BASE_SCALE = 0.05;
 
   private readonly registryIdentifier: string;
@@ -24,12 +24,12 @@ export default class GeneratorRegistry {
               seed: GeneratorRegistry.BASE_SEED,
               detail: 8,
               scale: GeneratorRegistry.BASE_SCALE,
-              relevance: 0.15,
+              relevance: 0.1,
             }, {
               seed: GeneratorRegistry.BASE_SEED + 1,
               detail: 4,
               scale: GeneratorRegistry.BASE_SCALE * 0.075,
-              relevance: 0.85,
+              relevance: 0.9,
             }, app.WIDTH, app.HEIGHT),
         "height_map_generator",
     );
