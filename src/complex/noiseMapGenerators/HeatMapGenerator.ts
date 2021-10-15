@@ -15,7 +15,7 @@ export default class HeatMapGenerator extends NoiseMapGenerator {
     protected generateMap(): Map<number> {
         return this.map.forEach((value, position) => {
             // TODO: make algorithm depend on height map
-            return (this.noiseGenerator.makeNoise(position.getScaled(this.settings.scale)) + 1) / 2 * 255;
+            return this.noiseGenerator.makeNoise(position.getScaled(this.settings.scale)) * 255;
         });
     }
 }

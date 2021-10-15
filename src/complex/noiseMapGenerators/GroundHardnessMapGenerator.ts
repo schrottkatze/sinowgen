@@ -26,7 +26,7 @@ export default class GroundHardnessMapGenerator extends NoiseMapGenerator {
     protected generateMap(): Map<number> {
         return this.map.forEach((value, position) => {
             // TODO: make the algorithm be dependent on the other maps
-            return (this.noiseGenerator.makeNoise(position.getScaled(this.settings.scale)) + 1) / 2 * 255;
+            return this.noiseGenerator.makeNoise(position.getScaled(this.settings.scale)) * 255;
         });
     }
 }
