@@ -18,12 +18,16 @@ export default abstract class Biome {
         category: BiomeCategories,
     ) {
         this.biomeValueRanges = valueRanges;
-        this.category         = category;
-        this.scoringConfig    = scoringConfig;
+        this.category = category;
+        this.scoringConfig = scoringConfig;
     }
 
-    private static valueIsInRange(value: number, {max, min}: biomeValueRangeVariants): boolean {
-        return value >= min || value <= max;
+    public calculateMatchingScore({groundHardness, heat, height, moisture}: PointValues): number {
+        const heatScore = Biome.getValueScore(heat, this.biomeValueRanges.heatRange) * this.scoringConfig.heatScoreRelevance;
+        const moistureScore = Biome.getValueScore(moisture, this.biomeValueRanges.moistureRange) * this.scoringConfig.moistureScoreRelevance;
+        const groundHardnessScore = Biome.getValueScore(groundHardness, this.biomeValueRanges.groundHardnessRange) * this.scoringConfig.groundHardnessScoringRelevance;
+        const heightScore = Biome.getValueScore(height, this.biomeValueRanges.heightRange) * this.scoringConfig.heightScoreRelevance;
+        return heatScore + moistureScore + groundHardnessScore + heightScore;
     }
 
     private static getValueScore(value: number, valueRange: biomeValueRangeVariants): number {
@@ -31,26 +35,9 @@ export default abstract class Biome {
         else return -(1 / Math.abs(valueRange.max)) * value + 1;
     }
 
-    public calculateMatchingScore({groundHardness, heat, height, moisture}: PointValues): number {
-        const {
-                  groundHardnessScoringRelevance,
-                  heatScoreRelevance,
-                  heightScoreRelevance,
-                  moistureScoreRelevance
-              }                                                            = this.scoringConfig;
-        const {heatRange, moistureRange, groundHardnessRange, heightRange} = this.biomeValueRanges;
-
-        const heatScore           = Biome.getValueScore(heat, heatRange) * heatScoreRelevance;
-        const moistureScore       = Biome.getValueScore(moisture, moistureRange) * moistureScoreRelevance;
-        const groundHardnessScore = Biome.getValueScore(groundHardness, groundHardnessRange) * groundHardnessScoringRelevance;
-        const heightScore         = Biome.getValueScore(height, heightRange) * heightScoreRelevance;
-        return heatScore + moistureScore + groundHardnessScore + heightScore;
-    }
-
     public valuesAreInRange({groundHardness, heat, height, moisture}: PointValues) {
         const {heatRange, moistureRange, groundHardnessRange, heightRange} = this.biomeValueRanges;
-        // noinspection OverlyComplexBooleanExpressionJS
-        const valuesArentInRange                                           = !(
+        const valuesArentInRange = !(
             Biome.valueIsInRange(heat, heatRange)
             && Biome.valueIsInRange(moisture, moistureRange)
             && Biome.valueIsInRange(groundHardness, groundHardnessRange)
@@ -58,6 +45,10 @@ export default abstract class Biome {
         );
         if (valuesArentInRange)
             return -1;
+    }
+
+    private static valueIsInRange(value: number, {max, min}: biomeValueRangeVariants): boolean {
+        return value >= min || value <= max;
     }
 
     abstract getColorFromValues(): Color

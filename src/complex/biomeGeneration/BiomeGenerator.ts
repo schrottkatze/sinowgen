@@ -18,7 +18,7 @@ export default class BiomeGenerator {
 
     private makeBiomeMap(): void {
         this.biomeMap = this.biomeMap.forEach<string>((value, position) => {
-            const values                          = this.getPointValues(position);
+            const values = this.getPointValues(position);
             let scores: { [key: string]: number } = {};
             if (values.height <= HeightLevels.SEA_LEVEL) BiomeGenerator.getScores(values, Registration.OCEAN_BIOME_REGISTRY);
             else BiomeGenerator.getScores(values, Registration.LAND_BIOME_REGISTRY);
@@ -38,19 +38,20 @@ export default class BiomeGenerator {
     private static getScores(values: PointValues, registry: BiomeRegistry): { [key: string]: number } {
         let scores: { [key: string]: number } = {};
         for (let registryKey in registry.registry) {
-            scores[`${registry.registryIdentifier}:${registryKey}`] = registry
-                .getRegistryObject(registryKey)
-                .calculateMatchingScore(values);
+            const registryObject = registry.getRegistryObject(registryKey);
+            const id = `${registry.registryIdentifier}:${registryKey}`;
+            if (registryObject.valuesAreInRange(values))
+                scores[id] = registryObject.calculateMatchingScore(values);
         }
         return scores;
     }
 
     private static findMostSuitableBiome(scores: { [key: string]: number }): string {
         let mostSuitableBiome: string = "";
-        let maxValue: number          = 0;
+        let maxValue: number = 0;
         for (let scoresKey in scores) {
             if (scores[scoresKey] > maxValue) {
-                maxValue          = scores[scoresKey];
+                maxValue = scores[scoresKey];
                 mostSuitableBiome = scoresKey;
             }
         }
