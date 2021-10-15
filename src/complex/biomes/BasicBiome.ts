@@ -1,9 +1,11 @@
 import Biome from "../biomeGeneration/Biome";
 import Color from "../../util/Color";
 import {BiomeCategories} from "../biomeGeneration/enums/BiomeCategories";
-import {BiomeColorSet} from "../../interfaces/BiomeColorSet";
-import {BiomeValueRangeSet} from "../../interfaces/BiomeValueRangeSet";
-import {BiomeValueScoringConfig} from "../../interfaces/BiomeValueScoringConfig";
+import BiomeColorSet from "../../interfaces/BiomeColorSet";
+import BiomeValueRangeSet from "../../interfaces/BiomeValueRangeSet";
+import BiomeValueScoringConfig from "../../interfaces/BiomeValueScoringConfig";
+import {ValueMapSet} from "../biomeGeneration/BiomeGenerator";
+import Position from "../../util/Position";
 
 export default class BasicBiome extends Biome {
     private lowestPointColors: BiomeColorSet;
@@ -21,7 +23,7 @@ export default class BasicBiome extends Biome {
         this.lowestPointColors = lowestPointColors;
     }
 
-    public getColorFromValues(): Color {
-        return new Color(0, 0, 0, 0);
+    public getColorFromValues(values: ValueMapSet, pos: Position): Color {
+        return this.highestPointColors.optimalConditions;
     }
 }

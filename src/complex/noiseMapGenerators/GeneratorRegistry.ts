@@ -4,10 +4,11 @@ import MoistureMapGenerator from "./MoistureMapGenerator";
 import GroundHardnessMapGenerator from "./GroundHardnessMapGenerator";
 import NoiseMapGenerator from "./NoiseMapGenerator";
 import {app} from "../../App";
+import {ValueMapSet} from "../biomeGeneration/BiomeGenerator";
 
 export default class GeneratorRegistry {
 
-    public static readonly BASE_SEED = 1634119621509;
+    public static readonly BASE_SEED = Date.now();
     public static readonly BASE_SCALE = 0.05;
 
     private readonly registryIdentifier: string;
@@ -74,7 +75,17 @@ export default class GeneratorRegistry {
     }
 
     public get(key: string): NoiseMapGenerator {
-        return this.registry[key];
+        if (this.registry[key]) return this.registry[key];
+        else throw new Error(`RegistryObject "${key}" doesn't exist.`);
+    }
+
+    public getMapsFromAllGenerators(): ValueMapSet {
+        return {
+            heatMap: this.get("heat_map_generator").map,
+            moistureMap: this.get("moisture_map_generator").map,
+            groundHardnessMap: this.get("ground_hardness_map_generator").map,
+            heightMap: this.get("height_map_generator").map,
+        };
     }
 
     private register(generator: NoiseMapGenerator, key: string): NoiseMapGenerator {

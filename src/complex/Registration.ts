@@ -19,10 +19,10 @@ export default class Registration {
         console.timeEnd("Registration");
     }
 
-    private getBiomeById(biomeId: string): Biome {
+    public static getBiomeById(biomeId: string): Biome {
         const [registry, id] = biomeId.split(":");
-        if (registry === "ocean_biomes") return Registration.OCEAN_BIOME_REGISTRY.getRegistryObject(id);
-        if (registry === "land_biomes") return Registration.LAND_BIOME_REGISTRY.getRegistryObject(id);
+        if (registry === "ocean_biomes") return Registration.OCEAN_BIOME_REGISTRY.get(id);
+        if (registry === "land_biomes") return Registration.LAND_BIOME_REGISTRY.get(id);
         else throw new Error(`Registry '${registry}' not found.`);
     }
 }

@@ -36,7 +36,7 @@ export default class BiomeRegistry {
         this._registry[key] = biome;
     }
 
-    public getRegistryObject(key: string): Biome {
+    public get(key: string): Biome {
         if (this._registry[key]) return this._registry[key];
         else throw new Error(`RegistryObject "${key}" doesn't exist.`);
     }

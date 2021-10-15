@@ -6,6 +6,7 @@ import Registration from "./complex/Registration";
 import GeneratorRegistry from "./complex/noiseMapGenerators/GeneratorRegistry";
 import HeightMapGenerator from "./complex/noiseMapGenerators/HeightMapGenerator";
 import BiomeGenerator from "./complex/biomeGeneration/BiomeGenerator";
+import WorldGenerator from "./complex/WorldGenerator";
 
 class App {
     public readonly HEIGHT = 1080;
@@ -31,24 +32,30 @@ class App {
         console.time("Map generation and rendering");
 
         Registration.register();
-        const biomeGen = new SimpleBiomeGenerator(SimpleBiomeMaps.gabrielBiomeMap);
+
+        // const biomeGen = new SimpleBiomeGenerator(SimpleBiomeMaps.gabrielBiomeMap);
         // const worldGen = new SimpleWorldGenerator(biomeGen, 100);
 
-        const heightMapGen = Registration.NOISE_GENERATOR_REGISTRY.get("height_map_generator") as HeightMapGenerator;
+        // const heightMapGen = Registration.NOISE_GENERATOR_REGISTRY.get("height_map_generator") as HeightMapGenerator;
 
-        const renderer = new Renderer(heightMapGen.getColorMap(biomeGen));
+        // const renderer = new Renderer(heightMapGen.getColorMap(biomeGen));
         // const renderer = new Renderer(worldGen.getColorMap())
-        renderer.render(p);
+        // renderer.render(p);
 
         console.timeEnd("Map generation and rendering");
 
         console.time("complex");
-        const ComplexBiomeGen = new BiomeGenerator({
-            groundHardnessMap: Registration.NOISE_GENERATOR_REGISTRY.get("ground_hardness_map_generator").map,
-            heatMap:           Registration.NOISE_GENERATOR_REGISTRY.get("heat_map_generator").map,
-            heightMap:         Registration.NOISE_GENERATOR_REGISTRY.get("height_map_generator").map,
-            moistureMap:       Registration.NOISE_GENERATOR_REGISTRY.get("moisture_map_generator").map
-        });
+
+        const complexBiomeGen = new BiomeGenerator(Registration.NOISE_GENERATOR_REGISTRY.getMapsFromAllGenerators());
+
+        console.log(complexBiomeGen.biomeMap);
+        console.log(Registration.NOISE_GENERATOR_REGISTRY.getMapsFromAllGenerators());
+
+        const worldGen = new WorldGenerator(complexBiomeGen.biomeMap, Registration.NOISE_GENERATOR_REGISTRY.getMapsFromAllGenerators());
+
+        const renderer = new Renderer(worldGen.makeColorMap());
+        renderer.render(p);
+
         console.timeEnd("complex");
         p.noLoop();
     }
