@@ -2,9 +2,9 @@ import Map from "../../util/Map";
 import {app} from "../../App";
 import Registration from "../Registration";
 import {HeightLevels} from "./enums/HeightLevels";
-import {PointValues} from "./Biome";
 import BiomeRegistry from "./BiomeRegistry";
 import Position from "../../util/Position";
+import {MapPointValues} from "../../interfaces/MapPointValues";
 
 export default class BiomeGenerator {
     private maps: ValueMapSet;
@@ -26,7 +26,7 @@ export default class BiomeGenerator {
         });
     }
 
-    private getPointValues(pos: Position): PointValues {
+    private getPointValues(pos: Position): MapPointValues {
         return {
             heat:           this.maps.heatMap.getPosition(pos),
             moisture:       this.maps.moistureMap.getPosition(pos),
@@ -35,7 +35,7 @@ export default class BiomeGenerator {
         };
     }
 
-    private static getScores(values: PointValues, registry: BiomeRegistry): { [key: string]: number } {
+    private static getScores(values: MapPointValues, registry: BiomeRegistry): { [key: string]: number } {
         let scores: { [key: string]: number } = {};
         for (let registryKey in registry.registry) {
             const registryObject = registry.getRegistryObject(registryKey);

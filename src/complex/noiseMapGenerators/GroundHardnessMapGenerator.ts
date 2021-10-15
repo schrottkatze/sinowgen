@@ -16,9 +16,9 @@ export default class GroundHardnessMapGenerator extends NoiseMapGenerator {
         heightMap: Map<number>,
     ) {
         super(settings, width, height);
-        this.heatMap     = heatMap;
+        this.heatMap = heatMap;
         this.moistureMap = moistureMap;
-        this.heightMap   = heightMap;
+        this.heightMap = heightMap;
 
         this.map = this.generateMap();
     }

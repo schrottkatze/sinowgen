@@ -62,9 +62,9 @@ export default class Color {
     }
 
     private roundValuesToIntegers(): void {
-        this.red   = Math.round(this.red);
+        this.red = Math.round(this.red);
         this.green = Math.round(this.green);
-        this.blue  = Math.round(this.blue);
+        this.blue = Math.round(this.blue);
         this.alpha = Math.round(this.alpha);
     }
 }

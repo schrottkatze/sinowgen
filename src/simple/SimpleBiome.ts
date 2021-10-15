@@ -16,7 +16,7 @@ export default class SimpleBiome {
             return;
 
         const colorDifferences: Color = this.lowColor.calculateDifference(this.highColor);
-        const relativeHeight          = this.getRelativeHeight(height);
+        const relativeHeight = this.getRelativeHeight(height);
         return new Color(
             colorDifferences.getRed() * relativeHeight + this.lowColor.getRed(),
             colorDifferences.getGreen() * relativeHeight + this.lowColor.getGreen(),

@@ -37,7 +37,7 @@ export default class HeightMapGenerator extends NoiseMapGenerator {
     protected generateMap(): Map<number> {
         return this.map.forEach<number>((value, position) => {
             let noiseGeneralHeightValue = this.terrainShapeGenerator.makeNoise(position.getScaled(this.terrainShapeGeneratorSettings.scale));
-            let noiseDetailHeightValue  = this.noiseGenerator.makeNoise(position.getScaled(this.settings.scale));
+            let noiseDetailHeightValue = this.noiseGenerator.makeNoise(position.getScaled(this.settings.scale));
 
             if (this.terrainShapeGeneratorSettings.relevance && this.settings.relevance) {
                 noiseGeneralHeightValue *= this.terrainShapeGeneratorSettings.relevance;

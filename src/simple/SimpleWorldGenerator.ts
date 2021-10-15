@@ -24,7 +24,7 @@ export default class SimpleWorldGenerator {
     private static generateNoiseMap(
         generator: (noiseVal: number) => number,
     ): Map<number> {
-        const noise  = new FractalNoise(GeneratorRegistry.BASE_SEED, 8);
+        const noise = new FractalNoise(GeneratorRegistry.BASE_SEED, 8);
         let noiseMap = new Map<number>(app.WIDTH, app.HEIGHT);
 
         noiseMap = noiseMap.forEach<number>((value, position) => {

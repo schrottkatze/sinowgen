@@ -7,7 +7,7 @@ import {app} from "../../App";
 
 export default class GeneratorRegistry {
 
-    public static readonly BASE_SEED  = 1634119621509;
+    public static readonly BASE_SEED = 1634119621509;
     public static readonly BASE_SCALE = 0.05;
 
     private readonly registryIdentifier: string;

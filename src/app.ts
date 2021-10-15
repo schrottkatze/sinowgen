@@ -9,14 +9,14 @@ import BiomeGenerator from "./complex/biomeGeneration/BiomeGenerator";
 
 class App {
     public readonly HEIGHT = 1080;
-    public readonly WIDTH  = 1080;
+    public readonly WIDTH = 1080;
 
     private instance: p5;
 
     constructor() {
         this.instance = new p5((p: p5) => {
             p.setup = () => this.setup(p);
-            p.draw  = () => this.draw(p);
+            p.draw = () => this.draw(p);
         });
     }
 

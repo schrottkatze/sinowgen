@@ -6,9 +6,9 @@ export default abstract class NoiseMapGenerator {
     private readonly _settings: NoiseGeneratorSettings;
 
     protected constructor(settings: NoiseGeneratorSettings, width: number, height: number) {
-        this._settings       = settings;
+        this._settings = settings;
         this._noiseGenerator = new FractalNoise(settings.seed, settings.detail);
-        this._map            = new Map<number>(width, height);
+        this._map = new Map<number>(width, height);
     }
 
     private readonly _noiseGenerator: FractalNoise;
