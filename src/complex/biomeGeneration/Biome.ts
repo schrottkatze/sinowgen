@@ -84,7 +84,7 @@ export type biomeValueRange<T> = {
     optimum: T | number;
 }
 
-interface PointValues {
+export interface PointValues {
     heat: number;
     moisture: number;
     groundHardness: number;

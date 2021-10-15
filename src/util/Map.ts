@@ -19,8 +19,10 @@ export default class Map<T> {
         this._map[position.x][position.y] = value;
     }
 
-    public getPosition(position: Position): T | null {
-        return this._map[position.x][position.y];
+    public getPosition(position: Position): T {
+        const value = this._map[position.x][position.y];
+        if (value) return value;
+        else throw new Error(`Tried to get unassigned Position(${position.x}, ${position.y}).`);
     }
 
     // noinspection FunctionWithMultipleLoopsJS
