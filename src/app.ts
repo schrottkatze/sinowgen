@@ -7,8 +7,11 @@ import GeneratorRegistry from "./complex/noiseMapGenerators/GeneratorRegistry";
 import HeightMapGenerator from "./complex/noiseMapGenerators/HeightMapGenerator";
 import BiomeGenerator from "./complex/biomeGeneration/BiomeGenerator";
 import WorldGenerator from "./complex/WorldGenerator";
+import SimpleWorldGenerator from "./simple/SimpleWorldGenerator";
 
 class App {
+    public readonly MODE: Modes = Modes.BETTER_HEIGHTMAPS;
+
     public readonly HEIGHT = 1080;
     public readonly WIDTH = 1080;
 
@@ -29,36 +32,38 @@ class App {
 
     public draw(p: p5): void {
         console.log(`Seed: ${GeneratorRegistry.BASE_SEED}`);
-        console.time("Map generation and rendering");
 
         Registration.register();
 
-        // const biomeGen = new SimpleBiomeGenerator(SimpleBiomeMaps.gabrielBiomeMap);
-        // const worldGen = new SimpleWorldGenerator(biomeGen, 100);
+        let renderer: Renderer | undefined;
 
-        // const heightMapGen = Registration.NOISE_GENERATOR_REGISTRY.get("height_map_generator") as HeightMapGenerator;
-
-        // const renderer = new Renderer(heightMapGen.getColorMap(biomeGen));
-        // const renderer = new Renderer(worldGen.getColorMap())
-        // renderer.render(p);
-
-        console.timeEnd("Map generation and rendering");
-
-        console.time("complex");
-
-        const complexBiomeGen = new BiomeGenerator(Registration.NOISE_GENERATOR_REGISTRY.getMapsFromAllGenerators());
-
-        console.log(complexBiomeGen.biomeMap);
-        console.log(Registration.NOISE_GENERATOR_REGISTRY.getMapsFromAllGenerators());
-
-        const worldGen = new WorldGenerator(complexBiomeGen.biomeMap, Registration.NOISE_GENERATOR_REGISTRY.getMapsFromAllGenerators());
-
-        const renderer = new Renderer(worldGen.makeColorMap());
-        renderer.render(p);
-
-        console.timeEnd("complex");
+        const simpleBiomeGen = new SimpleBiomeGenerator(SimpleBiomeMaps.gabrielBiomeMap);
+        if (this.MODE === Modes.SIMPLE) {
+            console.time("Simple WG");
+            const worldGen = new SimpleWorldGenerator(simpleBiomeGen, 100);
+            renderer = new Renderer(worldGen.getColorMap());
+            console.timeEnd("Simple WG");
+        } else if (this.MODE === Modes.BETTER_HEIGHTMAPS) {
+            console.time("Better HeightMaps WG");
+            const heightMapGen = Registration.NOISE_GENERATOR_REGISTRY.get("height_map_generator") as HeightMapGenerator;
+            renderer = new Renderer(heightMapGen.getColorMap(simpleBiomeGen));
+            console.timeEnd("Better HeightMaps WG");
+        } else if (this.MODE === Modes.COMPLEX) {
+            console.time("Complex WG");
+            const complexBiomeGen = new BiomeGenerator(Registration.NOISE_GENERATOR_REGISTRY.getMapsFromAllGenerators());
+            const worldGen = new WorldGenerator(complexBiomeGen.biomeMap, Registration.NOISE_GENERATOR_REGISTRY.getMapsFromAllGenerators());
+            renderer = new Renderer(worldGen.makeColorMap());
+            console.timeEnd("Complex WG");
+        }
+        if (renderer) renderer.render(p);
         p.noLoop();
     }
+}
+
+export enum Modes {
+    SIMPLE,
+    BETTER_HEIGHTMAPS,
+    COMPLEX
 }
 
 export const app = new App();
