@@ -7,11 +7,13 @@ export default class Renderer {
     }
 
     render(p: p5) {
+        console.time("Render");
         this.colorMap.forEach((value, position) => {
                 if (value) p.set(position.x, position.y, value.getAsArray());
                 else throw new Error(`Error during rendering: no color value at ${position.toString()}`);
             },
         );
+        console.timeEnd("Render");
 
         p.updatePixels();
     }

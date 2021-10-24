@@ -12,8 +12,8 @@ import SimpleWorldGenerator from "./simple/SimpleWorldGenerator";
 class App {
     public readonly MODE: Modes = Modes.BETTER_HEIGHTMAPS;
 
-    public readonly HEIGHT = 1080;
-    public readonly WIDTH = 1080;
+    public readonly HEIGHT = window.innerHeight;
+    public readonly WIDTH = window.innerWidth;
 
     private instance: p5;
 
@@ -56,6 +56,14 @@ class App {
             console.timeEnd("Complex WG");
         }
         if (renderer) renderer.render(p);
+
+        console.time("seedTeller");
+        let seedTeller: HTMLSpanElement;
+        seedTeller = document.createElement("span");
+        seedTeller.innerText = `Seed: ${GeneratorRegistry.BASE_SEED}`;
+        console.timeEnd("seedTeller");
+
+        document.body.append(seedTeller);
         p.noLoop();
     }
 }

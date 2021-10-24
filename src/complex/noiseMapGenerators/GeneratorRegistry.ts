@@ -25,12 +25,12 @@ export default class GeneratorRegistry {
                     seed:      GeneratorRegistry.BASE_SEED,
                     detail:    8,
                     scale:     GeneratorRegistry.BASE_SCALE,
-                    relevance: 0.1,
+                    relevance: 0.15,
                 }, {
                     seed:      GeneratorRegistry.BASE_SEED + 1,
                     detail:    4,
                     scale:     GeneratorRegistry.BASE_SCALE * 0.075,
-                    relevance: 0.9,
+                    relevance: 0.85,
                 }, app.WIDTH, app.HEIGHT),
             "height_map_generator",
         );

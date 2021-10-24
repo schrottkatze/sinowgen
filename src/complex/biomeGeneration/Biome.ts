@@ -52,7 +52,7 @@ export default abstract class Biome {
 
     private static validateBiomeValueRange(range: biomeValueRangeVariants): boolean {
         if(range.min && range.max && range.optimum) return true;
-        else throw new Error("Invalid biome value range");
+        else throw new Error(`Invalid biome value range: ${JSON.stringify(range)}`);
     }
 
     public valuesAreInRange({groundHardness, heat, height, moisture}: MapPointValues): boolean {
